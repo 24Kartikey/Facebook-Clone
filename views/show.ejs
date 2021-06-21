@@ -1,0 +1,54 @@
+<%- include ("./partials/header") %>
+
+
+<div class="container mt-3">
+  <div class="row">
+
+    <div class="col col-8">
+
+      <div class="card mb-4" style="width: 100%">
+        <div class="head my-2 ms-3">
+          <h3 class="card-title"> UserName</h3>
+        </div>
+        <img src="<%= post.imgUrl %>" class="card-img-top" alt="">
+
+        <div class="card-body">
+          <h5 class="card-title"> <%= post.description %></h5>
+          
+          <form action="/<%= post._id %>?_method=DELETE" method="POST">
+            <a class="btn btn-primary" href="/<%= post._id %>/edit">Edit Post</a>
+            <button class="btn btn-danger">Delete</button>
+          </form>
+
+        </div>
+      </div>
+
+  </div>
+
+  <div class="col col-4">
+    <h4 class="mt-3">Comments:</h4>
+      <% for(let comment of post.comments) { %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text"><%= comment.body %></p>
+            <form action="/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </div>
+      </div>
+      <% } %>
+
+      <form action="/<%= post._id %>/comments" method="POST" class="mb-3">
+        <div class="mb-3">
+          <label class="form-label" for="body">Add A Comment:</label>
+          <textarea class="form-control" name="comment[body]" id="body" cols="30" rows="3" required></textarea>
+        </div>
+        <button class="btn btn-success">SUBMIT</button>
+      </form>
+  </div>
+
+  </div>
+</div>
+
+
+<%- include ("./partials/footer") %>
