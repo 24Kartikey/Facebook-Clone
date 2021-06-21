@@ -1,0 +1,74 @@
+<%- include ("./partials/header") %>
+
+  <div class="container">
+    <div class="row align-items-start">
+
+      <div class="col col-3">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">Kartikey choudhary</a>
+            <a href="#" class="list-group-item list-group-item-action">COVID-19 information centre</a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/friends.png" alt=""> <span class="ms-2">Find Friends</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/groups.png" alt=""> <span class="ms-2">Groups</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/watch.png" alt=""> <span class="ms-2">Watch</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/events.png" alt=""> <span class="ms-2">Events</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/memories.png" alt=""> <span class="ms-2">Memories</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/saved.png" alt=""> <span class="ms-2">Saved</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/pages.png" alt=""> <span class="ms-2">Pages</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/jobs.png" alt=""> <span class="ms-2">Jobs</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/ad centre.png" alt=""> <span class="ms-2">Ad Centre</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/ads manager.png" alt=""> <span class="ms-2">Ads Manager</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/blood donations.png" alt=""> <span class="ms-2">Blood Donations</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/climate.png" alt=""> <span class="ms-2">Climate Science Information Centre</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/crisis.png" alt=""> <span class="ms-2">Crisis Response</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/emotional health.png" alt=""> <span class="ms-2">Emotional Health</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/friend list.png" alt=""> <span class="ms-2">Friend Lists</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/fundraisers.png" alt=""> <span class="ms-2">Fundraisers</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/gaming.png" alt=""> <span class="ms-2">Gaming Videos</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/live.png" alt=""> <span class="ms-2">Live Videos</span></a>
+            <a href="#" class="list-group-item list-group-item-action"> <img class="icon" src="icons/messenger.png" alt=""><span class="ms-2">Messenger</span></a>
+            <a href="#" class="list-group-item list-group-item-action"><img class="icon" src="" alt=""> <span class="ms-2">Messenger Kids</span></a>
+            <a href="#" class="list-group-item list-group-item-action">Offers</a>
+            <a href="#" class="list-group-item list-group-item-action">Play Games</a>
+            <a href="#" class="list-group-item list-group-item-action">Recent ad activity</a>
+            <a href="#" class="list-group-item list-group-item-action">Recent and favourites</a>
+            <a href="#" class="list-group-item list-group-item-action">Weather</a>
+            <a href="#" class="list-group-item list-group-item-action">See less</a>
+          </div>
+      </div>
+
+      <div class="col col-7">
+
+        <h1>My Feed</h1>
+
+        <a href="/createPost">create new post</a>
+
+        <% for(let post of posts) { %>
+          <div class="card mb-4" style="width: 100%">
+            <div class="head my-2 ms-3">
+              <h3 class="card-title">UserName</h3>
+            </div>
+            <img src="<%= post.imgUrl %>" class="card-img-top" alt="">
+
+            <div class="card-body">
+              <h5 class="card-title"> <%= post.description %></h5>
+              <a href="/<%= post._id %>" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          
+          <% } %>
+
+      </div>
+
+      <div class="col col-2">
+        One of three columns
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+<%- include ("./partials/footer") %>
