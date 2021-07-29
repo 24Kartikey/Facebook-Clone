@@ -11,7 +11,11 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand ms-3" href="/"><i class="fab fa-facebook"></i></a>
+          <% if(currentUser) { %>
+            <a class="navbar-brand ms-3" href="/"><i class="fab fa-facebook"></i></a>
+          <% }else { %>
+            <a class="navbar-brand ms-3" href="/login"><i class="fab fa-facebook"></i></a>
+          <% } %>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           </form>
@@ -52,10 +56,15 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                      <% if(currentUser) { %>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                      <% }else { %>
+                        <li><a class="dropdown-item" href="/login">Login</a></li>
+                        <li><a class="dropdown-item" href="/register">Register</a></li>
+                      <% } %>
                     </ul>
                   </li>  
               </ul>

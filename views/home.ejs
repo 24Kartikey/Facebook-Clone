@@ -40,27 +40,51 @@
 
         <h1>My Feed</h1>
 
-        <a href="/createPost">create new post</a>
+        <!-- <a href="/createPost">create new post</a> -->
+
+        <div class="container my-3 py-3 border rounded-2">
+          <form action="/createPost" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+              <!-- <label for="description" class="form-label">Description</label> -->
+              <input type="text" name="description" class="form-control" id="description" placeholder="Whats on your mind">
+            </div>
+            
+            <div class="input-group mb-3 custom-file">
+              <input type="file" name="image" class="form-control" id="image" multiple>
+              <label class="input-group-text" for="image">Upload</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Create Post</button>
+            <a class= "btn btn-secondary" href="/">Discard</a>
+          </form>
+        </div>
 
         <% for(let post of posts) { %>
           <div class="card mb-4" style="width: 100%">
-            <div class="head my-2 ms-3">
-              <h3 class="card-title">UserName</h3>
+            <div class="head mt-2 ms-3">
+              <h3 class="card-title"><%= post.author.username %></h3>
+              <p style="font-size: smaller;" class="text-muted"><%= post.createdAt.toDateString() %></p>
             </div>
-            <img src="<%= post.imgUrl %>" class="card-img-top" alt="">
-
+              <img src="<%= post.images[0].url %>" class="card-img-top" alt="">
             <div class="card-body">
               <h5 class="card-title"> <%= post.description %></h5>
-              <a href="/<%= post._id %>" class="btn btn-primary">Go somewhere</a>
+              <hr>
+
+              <form action="/<%= post._id %>/like?_method=PUT" method="POST">
+                <button class="btn btn-danger ms-2">Like</button>
+              </form>
+              <form action="/<%= post._id %>/unlike?_method=PUT" method="POST">
+                <button class="btn btn-danger ms-2">Unlike</button>
+              </form>
+              <a href="/<%= post._id %>" class="btn btn-primary ms-2">Comment</a>
+              <a href="/<%= post._id %>" class="btn btn-success ms-2">Share</a>
             </div>
           </div>
-          
           <% } %>
 
       </div>
 
       <div class="col col-2">
-        One of three columns
       </div>
 
     </div>

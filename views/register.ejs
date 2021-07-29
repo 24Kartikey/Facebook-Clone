@@ -1,9 +1,14 @@
 <%- include ("./partials/header") %>
 
-<div class="container">
-    <h1 class="text-center">Register</h1>
 
-    <form  action="/register" method="POST" novalidate>
+<div class="row">
+  <div class="col-3"></div>
+
+  <div class="col-6">
+    <div class="my-3">
+      <h1 class="text-center">Register</h1>
+  
+      <form  action="/register" method="POST" novalidate>
         <div class="mb-3">
             <label for="username" class="form-label">Username:</label>
             <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
@@ -20,14 +25,16 @@
           <input type="password" class="form-control" name="password" id="password">
         </div>
 
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Agree to Terms & Conditions*</label>
-        </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+    </div>
+    
+    <div class="my-3">
+      <h6>Already a user? <a href="/login">Login Instead?</a></h6>
+    </div>
+  </div>
 
+  <div class="col-3"></div>
 </div>
 
 

@@ -1,15 +1,19 @@
-const express = require('express'),
-     bodyParser = require('body-parser'),
-     mongoose = require('mongoose'),
-     session = require('express-session'),
-     flash = require('connect-flash'),
+if(process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
+
+const       express = require('express'),
+         bodyParser = require('body-parser'),
+           mongoose = require('mongoose'),
+            session = require('express-session'),
+              flash = require('connect-flash'),
      methodOverride = require('method-override'),
-     passport = require('passport'),
-     LocalStrategy = require('passport-local');
+           passport = require('passport'),
+      LocalStrategy = require('passport-local');
      
 
 const User = require('./models/user');
-
 
 const userRoutes = require('./routes/user'); 
 const postRoutes = require('./routes/post');
@@ -51,18 +55,19 @@ const sessionConfig = {
 app.use(session(sessionConfig)); 
 app.use(flash());
 
-app.use((req, res, next) =>  {
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    next(); 
-});
-
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) =>  {
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 
 app.use('/', userRoutes); 

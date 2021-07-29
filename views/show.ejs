@@ -8,17 +8,38 @@
 
       <div class="card mb-4" style="width: 100%">
         <div class="head my-2 ms-3">
-          <h3 class="card-title"> UserName</h3>
+          <h3 class="card-title"> <%= post.author.username %></h3>
+          <span style="font-size: smaller;" class="text-muted"><%= post.createdAt.toDateString() %></span>
         </div>
-        <img src="<%= post.imgUrl %>" class="card-img-top" alt="">
 
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% post.images.forEach((img, i) => { %>
+              <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                <img src="<%= img.url %>" class="d-block w-100" alt="">
+              </div>
+            <% }) %>
+          </div>
+          <% if(post.images.length >1) { %>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+          <% } %>
+        </div>
+        
         <div class="card-body">
           <h5 class="card-title"> <%= post.description %></h5>
-          
+          <% if(currentUser && post.author.equals(currentUser._id)) {%>
           <form action="/<%= post._id %>?_method=DELETE" method="POST">
             <a class="btn btn-primary" href="/<%= post._id %>/edit">Edit Post</a>
             <button class="btn btn-danger">Delete</button>
           </form>
+          <% } %>
 
         </div>
       </div>
@@ -30,14 +51,19 @@
       <% for(let comment of post.comments) { %>
         <div class="card mb-3">
           <div class="card-body">
-            <p class="card-text"><%= comment.body %></p>
+            <h6 class="card-subtitle mb-2 text-muted"><%= comment.author.username %></h6>
+            <p class="card-text"> <%= comment.body %></p>
+            <span style="font-size: smaller;" class="text-muted"><%= comment.createdAt.toDateString() %></span>
+            <% if(currentUser && comment.author.equals(currentUser._id)) {%>
             <form action="/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
               <button class="btn btn-sm btn-danger">Delete</button>
             </form>
+            <% } %>
           </div>
       </div>
       <% } %>
 
+      <% if(currentUser){ %>
       <form action="/<%= post._id %>/comments" method="POST" class="mb-3">
         <div class="mb-3">
           <label class="form-label" for="body">Add A Comment:</label>
@@ -45,6 +71,7 @@
         </div>
         <button class="btn btn-success">SUBMIT</button>
       </form>
+      <% } %>
   </div>
 
   </div>
